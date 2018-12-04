@@ -1,28 +1,46 @@
-<<!DOCTYPE html>
-<html>
-<head>
-    <title>project</title>
-     
-    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" type="main/css" href="css/style.css">
-</head>
-<body>
-<div class="form">
-<form method="post get">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>New Task</title>
+  </head>
+  <body>
+    <h1>New Article</h1>
+    <input type="text" id="title" placeholder="Name"><br/><br/>
+    <input type="text" id="title" placeholder="Price"><br/><br/>
+    <input type="text" id="title" placeholder="quantity"><br/><br/>
+    <button id="Add">submit</button>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script>
+      var product = {title:"", content:""};
+      $('#submit').click(function(event){
+        product.title = $('#title').val();
+        product.content = $('#content').val();
+        $.ajax({
+          method:"POST",
+          url:"/article/create",
+          data: article
+        }).done(function(response){
+          console.log(response);
+        }).fail(function(response){
+          console.log(response.responseText);
+        });
+      });
 
-    <input type="email" placeholder="name"></input>
-    |</br>
-    <input type="email" placeholder="price"></input>
-    </br>
-    <input type="email" placeholder="quantity"></input>
-    </br>
-    
-  <div class="right">
-  <input type="submit" value="Add">
-  </div>
-  </form>
-  </div>
-</div>
-</section>
-</body>
+      $('#Add').click(function(event){
+        $.ajax({
+          method:"GET",
+          url:"/product/list"
+        }).done(function(response){
+          console.log(response);
+        }).fail(function(response){
+          console.log(response.responseText);
+        });
+      });
+
+    </script>
+  </body>
 </html>
